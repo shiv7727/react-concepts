@@ -8,8 +8,8 @@ import Memo from './useMemohooks/Memo';
 function App() {
 	return (
 		<div className='App'>
-			{/* <ParentComponent /> */}
-			<Memo />
+			<ParentComponent />
+			{/* <Memo /> */}
 		</div>
 	);
 }
