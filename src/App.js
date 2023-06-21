@@ -2,24 +2,24 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	function* countAppleSales() {
+		const salesList = [3, 5, 7];
+		for (let i = 0; i < salesList.length; i++) {
+			yield salesList[i];
+		}
+	}
+
+	const appleStore = countAppleSales(); // generator function
+	console.log(appleStore.next());
+	console.log(appleStore.next());
+	console.log(appleStore.next());
+	console.log(appleStore.next());
+
+	return (
+		<div className='App'>
+			<h1>yield generator function </h1>
+		</div>
+	);
 }
 
 export default App;
