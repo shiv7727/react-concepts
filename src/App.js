@@ -9,9 +9,8 @@ import TestMemo from './useMemohooks/TestMemo';
 function App() {
 	return (
 		<div className='App'>
-			{/* <ParentComponent /> */}
-			{/* <Memo /> */}
-			<TestMemo />
+			<ParentComponent />
+			{/* useMemoMohitEG branch is a simple and best example of usememo check */}
 		</div>
 	);
 }
