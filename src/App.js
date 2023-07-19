@@ -1,25 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import Click from './Click';
+import Hover from './Hover';
+import RenderProps from './RenderProps';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className='App'>
+			{/* <Click /> */}
+			{/* <Hover /> */}
+			<RenderProps
+				render={(count, increment) => (
+					<Click count={count} increment={increment} />
+				)}
+			/>
+			<RenderProps
+				render={(count, increment) => (
+					<Hover count={count} increment={increment} />
+				)}
+			/>
+		</div>
+	);
 }
 
 export default App;
