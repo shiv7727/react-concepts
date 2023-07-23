@@ -6,6 +6,7 @@ function App() {
 
 	useEffect(() => {
 		inputRef.current.focus();
+		inputRef.current.style.color = 'red';
 	}, []);
 
 	return (
