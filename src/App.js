@@ -6,9 +6,9 @@ function App() {
 	return (
 		<div className='App'>
 			{/* Render props pattern example  */}
-			{/* <RenderExample /> */}
+			<RenderExample />
 			{/* Children props  */}
-			<RenderChildExample />
+			{/* <RenderChildExample /> */}
 		</div>
 	);
 }
