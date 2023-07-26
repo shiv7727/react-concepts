@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 
 function App() {
-	const [time, setTime] = useState(0);
+	const [time, setTime] = useState({
+		hrs: 0,
+		min: 0,
+		sec: 0,
+	});
 	const id = useRef(null);
 
 	useEffect(() => {
@@ -12,19 +16,35 @@ function App() {
 
 	const handleTime = () => {
 		id.current = setInterval(() => {
-			setTime((prevState) => prevState + 1);
+			setTime((prevState) => {
+				if (prevState.min === 60) {
+					return { ...prevState, hrs: prevState + 1 };
+				}
+				if (prevState.sec === 60) {
+					return { ...prevState, min: prevState + 1 };
+				}
+				return { ...prevState, sec: prevState.sec + 1 };
+			});
 		}, 1000);
 	};
 
 	return (
 		<div className='App'>
-			<h3>{time}</h3>
+			<h3>
+				{time.hrs.toLocaleString({
+					
+				})}:{time.min}:{time.sec}
+			</h3>
 			<button onClick={handleTime}>start</button>
 			<button onClick={() => clearInterval(id.current)}>pause</button>
 			<button
 				onClick={() => {
 					clearInterval(id.current);
-					setTime(0);
+					setTime({
+						hrs: 0,
+						min: 0,
+						sec: 0,
+					});
 				}}
 			>
 				Reset
