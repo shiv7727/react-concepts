@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [time, setTime] = useState(0);
+	let id = useRef(null);
+	let sizeOfViewPort = visualViewport.width;
+	// let sizeOfViewPort = 10;
+	function handleTime() {
+		id.current = setInterval(() => {
+			setTime((prevState) => prevState + 1);
+		}, 1);
+	}
+
+	useEffect(() => {
+		handleTime();
+		return () => clearInterval(id.current);
+	}, []);
+
+	useEffect(() => {
+		if (time > sizeOfViewPort - 1) {
+			clearInterval(id.current);
+		}
+	}, [time]);
+	return (
+		<div className='App'>
+			<h1>
+				Progres barv :: {time} and max:: {sizeOfViewPort}
+			</h1>
+			<progress value={time} max={sizeOfViewPort} />
+		</div>
+	);
 }
 
 export default App;
