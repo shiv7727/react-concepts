@@ -14,6 +14,7 @@ function App() {
 		return () => clearInterval(id.current);
 	}, []);
 
+	console.log(time);
 	const handleTime = () => {
 		id.current = setInterval(() => {
 			setTime((prevState) => {
@@ -25,15 +26,26 @@ function App() {
 				}
 				return { ...prevState, sec: prevState.sec + 1 };
 			});
-		}, 1000);
+		}, 100);
 	};
 
 	return (
 		<div className='App'>
 			<h3>
-				{time.hrs.toLocaleString({
-					
-				})}:{time.min}:{time.sec}
+				{time.hrs.toLocaleString('en-US', {
+					useGrouping: false,
+					minimumIntegerDigits: 2,
+				})}
+				:
+				{time.min.toLocaleString('en-US', {
+					useGrouping: false,
+					minimumIntegerDigits: 2,
+				})}
+				:
+				{time.sec.toLocaleString('en-US', {
+					useGrouping: false,
+					minimumIntegerDigits: 2,
+				})}
 			</h3>
 			<button onClick={handleTime}>start</button>
 			<button onClick={() => clearInterval(id.current)}>pause</button>
