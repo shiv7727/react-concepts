@@ -1,33 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import './App.css';
 
 function App() {
-	const [time, setTime] = useState(0);
-	let id = useRef(null);
-	let sizeOfViewPort = visualViewport.width;
-	// let sizeOfViewPort = 10;
-	function handleTime() {
-		id.current = setInterval(() => {
-			setTime((prevState) => prevState + 1);
-		}, 1);
-	}
+	let str = 'hello world world is good but world is not very good';
+	let strArr = str.split(' ');
+	console.log(strArr);
 
-	useEffect(() => {
-		handleTime();
-		return () => clearInterval(id.current);
-	}, []);
-
-	useEffect(() => {
-		if (time > sizeOfViewPort - 1) {
-			clearInterval(id.current);
+	let obj = {};
+	function wordCount(strArr) {
+		for (let i = 0; i < strArr.length; i++) {
+			if (obj[strArr[i]] === undefined) {
+				obj[strArr[i]] = 1;
+			} else {
+				obj[strArr[i]]++;
+			}
 		}
-	}, [time]);
+	}
+	wordCount(strArr);
+	console.log('obj', obj);
 	return (
 		<div className='App'>
-			<h1>
-				Progres barv :: {time} and max:: {sizeOfViewPort}
-			</h1>
-			<progress value={time} max={sizeOfViewPort} />
+			<h1>Duplicate string count</h1>
 		</div>
 	);
 }
