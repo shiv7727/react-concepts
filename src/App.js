@@ -5,7 +5,11 @@ function App() {
 	const [time, setTime] = useState(0);
 	const id = useRef(null);
 
-
+	const handleTime = () => {
+		setInterval(() => {
+			setTime((prevState) => prevState + 1);
+		}, 1000);
+	};
 
 	return (
 		<div className='App'>
