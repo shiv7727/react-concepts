@@ -19,14 +19,14 @@ function App() {
 		id.current = setInterval(() => {
 			setTime((prevState) => {
 				if (prevState.min === 60) {
-					return { ...prevState, hrs: prevState + 1 };
+					return { ...prevState, hrs: prevState.hrs + 1, min: 0 };
 				}
 				if (prevState.sec === 60) {
-					return { ...prevState, min: prevState + 1 };
+					return { ...prevState, min: prevState.min + 1, sec: 0 };
 				}
 				return { ...prevState, sec: prevState.sec + 1 };
 			});
-		}, 100);
+		}, 1000);
 	};
 
 	return (
