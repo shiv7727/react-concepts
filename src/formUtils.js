@@ -37,18 +37,21 @@ export const validateInput = (name, value) => {
 export const onFocusOut = (name, value, dispatch, formState) => {
 	const { hasError, error } = validateInput(name, value);
 	let isFormValid = true;
+	console.log(' hasError, error', hasError, error);
 	for (const key in formState) {
 		const item = formState[key];
+		console.log('name', name);
+		console.log('key', key);
+		console.log('item', item);
 		if ((key === name && hasError) || (key !== name && item.hasError)) {
 			isFormValid = false;
 			break;
 		}
-
-		dispatch({
-			type: UPDATE_FORM,
-			data: { name, value, hasError, error, touched: true, isFormValid },
-		});
 	}
+	dispatch({
+		type: UPDATE_FORM,
+		data: { name, value, hasError, error, touched: true, isFormValid },
+	});
 };
 
 export const onInputChange = (name, value, dispatch, formState) => {

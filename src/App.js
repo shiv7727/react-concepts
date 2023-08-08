@@ -56,6 +56,8 @@ function App() {
 		}
 	};
 
+	// console.log('regDetails', regDetails);
+
 	return (
 		<div className='App'>
 			<h1>UseReducer form</h1>
