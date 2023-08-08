@@ -1,10 +1,14 @@
 import React, { useReducer } from 'react';
+import { onInputChange, onFocusOut, validateInput } from './formUtils';
 import './App.css';
 
-const UPDATE_FORM = 'UPDATE_FORM';
+export const UPDATE_FORM = 'UPDATE_FORM';
 
 const initialDetails = {
 	email: { value: '', touched: false, hasError: false, error: '' },
+	firstName: { value: '', touched: false, hasError: false, error: '' },
+	lastName: { value: '', touched: false, hasError: false, error: '' },
+	password: { value: '', touched: false, hasError: false, error: '' },
 	isFormValid: false,
 };
 
@@ -21,52 +25,8 @@ const formReducer = (state, action) => {
 	}
 };
 
-const validateInput = (name, value) => {
-	const regExp = /^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/;
-
-	let hasError = false;
-	let error = '';
-
-	switch (name) {
-		case 'email':
-			if (!regExp.test(value)) {
-				hasError = true;
-				error = 'Invalid email address !';
-			}
-			break;
-		default:
-			break;
-	}
-	return { hasError, error };
-};
-
-const onInputChange = (name, value, dispatch, regDetails) => {
-	const { hasError, error } = validateInput(name, value);
-	dispatch({
-		type: UPDATE_FORM,
-		data: { name, value, hasError, error, touched: false },
-	});
-};
-
-const onFocusOut = (name, value, dispatch, regDetails) => {
-	const { hasError, error } = validateInput(name, value);
-	let isFormValid = true;
-	for (const key in regDetails) {
-		const item = regDetails[key];
-		if ((key === name && hasError) || (key !== name && item.hasError)) {
-			isFormValid = false;
-			break;
-		}
-
-		dispatch({
-			type: UPDATE_FORM,
-			data: { name, value, hasError, error, touched: true, isFormValid },
-		});
-	}
-};
-
-const handleBlur = (e, dispatch, regDetails) => {
-	onFocusOut(e.target.name, e.target.value, dispatch, regDetails);
+const handleBlur = (e, dispatch, formState) => {
+	onFocusOut(e.target.name, e.target.value, dispatch, formState);
 };
 
 function App() {
@@ -128,6 +88,52 @@ function App() {
 					{regDetails.email.hasError && (
 						<p className='error'>{regDetails.email.error}</p>
 					)}
+					<label for='firstName'>
+						<b>First Name</b>
+					</label>
+					<input
+						type='text'
+						placeholder='Enter First Name'
+						name='firstName'
+						id='firstName'
+						onChange={(e) => {
+							onInputChange(
+								e.target.name,
+								e.target.value,
+								dispatch,
+								regDetails,
+							);
+						}}
+						onBlur={(e) => {
+							handleBlur(e, dispatch, regDetails);
+						}}
+					/>
+					{regDetails.firstName.hasError && (
+						<p className='error'>{regDetails.firstName.error}</p>
+					)}
+					<label for='lastName'>
+						<b>last Name</b>
+					</label>
+					<input
+						type='text'
+						placeholder='Enter Last Name'
+						name='lastName'
+						id='lastName'
+						onChange={(e) => {
+							onInputChange(
+								e.target.name,
+								e.target.value,
+								dispatch,
+								regDetails,
+							);
+						}}
+						onBlur={(e) => {
+							handleBlur(e, dispatch, regDetails);
+						}}
+					/>
+					{regDetails.lastName.hasError && (
+						<p className='error'>{regDetails.lastName.error}</p>
+					)}
 
 					<label for='psw'>
 						<b>Password</b>
@@ -135,19 +141,10 @@ function App() {
 					<input
 						type='password'
 						placeholder='Enter Password'
-						name='psw'
+						name='password'
 						id='psw'
 					/>
 
-					<label for='psw-repeat'>
-						<b>Repeat Password</b>
-					</label>
-					<input
-						type='password'
-						placeholder='Repeat Password'
-						name='psw-repeat'
-						id='psw-repeat'
-					/>
 					<hr />
 
 					<button type='submit' class='registerbtn'>
