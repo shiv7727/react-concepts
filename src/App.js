@@ -62,12 +62,12 @@ function App() {
 		<div className='App'>
 			<h1>UseReducer form</h1>
 			<form onSubmit={handleSubmit}>
-				<div class='container'>
+				<div className='container'>
 					<h1>Register</h1>
 					<p>Please fill in this form to create an account.</p>
 					<hr />
 
-					<label for='email'>
+					<label htmlFor='email'>
 						<b>Email</b>
 					</label>
 					<input
@@ -90,7 +90,7 @@ function App() {
 					{regDetails.email.hasError && (
 						<p className='error'>{regDetails.email.error}</p>
 					)}
-					<label for='firstName'>
+					<label htmlFor='firstName'>
 						<b>First Name</b>
 					</label>
 					<input
@@ -113,7 +113,7 @@ function App() {
 					{regDetails.firstName.hasError && (
 						<p className='error'>{regDetails.firstName.error}</p>
 					)}
-					<label for='lastName'>
+					<label htmlFor='lastName'>
 						<b>last Name</b>
 					</label>
 					<input
@@ -137,7 +137,7 @@ function App() {
 						<p className='error'>{regDetails.lastName.error}</p>
 					)}
 
-					<label for='psw'>
+					<label htmlFor='psw'>
 						<b>Password</b>
 					</label>
 					<input
@@ -149,7 +149,7 @@ function App() {
 
 					<hr />
 
-					<button type='submit' class='registerbtn'>
+					<button type='submit' className='registerbtn'>
 						Register
 					</button>
 				</div>

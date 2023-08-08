@@ -1,7 +1,7 @@
 import { UPDATE_FORM } from './App';
 
 export const validateInput = (name, value) => {
-	const regExp = /^([\w\.\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/;
+	const regExp = /^([\w\\.\\+]{1,})([^\W])(@)([\w]{1,})(\.[\w]{1,})+$/;
 
 	let hasError = false;
 	let error = '';
