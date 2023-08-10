@@ -14,15 +14,15 @@ export const validateInput = (name: any, value: any) => {
 			}
 			break;
 		case 'firstName':
-			if (!regExp.test(value)) {
+			if (!value?.length) {
 				hasError = true;
-				error = 'Invalid email address !';
+				error = 'First name Can not be Empty';
 			}
 			break;
 		case 'lastName':
-			if (!regExp.test(value)) {
+			if (!value?.length) {
 				hasError = true;
-				error = 'Invalid email address !';
+				error = 'Last name Can not be Empty';
 			}
 			break;
 		default:
