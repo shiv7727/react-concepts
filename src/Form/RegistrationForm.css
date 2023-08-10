@@ -21,12 +21,14 @@ input[type=password] {
     display: inline-block;
     border: none;
     background: #f1f1f1;
+    margin: 0;
 }
 
 input[type=text]:focus,
 input[type=password]:focus {
     background-color: #ddd;
     outline: none;
+    margin: 0;
 }
 
 /* Overwrite default styles of hr */
@@ -60,4 +62,20 @@ a {
 .signin {
     background-color: #f1f1f1;
     text-align: center;
+}
+
+.error {
+    color: rgb(142, 7, 7);
+    padding: 10px;
+    display: inline-block;
+
+}
+
+label {
+    display: block;
+    padding-top: 15px;
+}
+
+.inputError {
+    border: 1px solid rgb(142, 7, 7) !important;
 }
