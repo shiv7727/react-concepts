@@ -3,16 +3,28 @@ import './App.css';
 
 function App() {
 	let id = useRef();
-	const [time, setTime] = useState(0);
+	const [time, setTime] = useState({
+		h: 0,
+		m: 0,
+		s: 0,
+	});
 
 	const handleTime = () => {
-		id.current = setTime(() => {
-			setTime((prevState) => prevState + 1);
-		}, 1000);
+		id.current = setInterval(() => {
+			setTime((prevState) => {
+				if (prevState.m === 60) {
+					return { ...prevState, h: prevState.h + 1, m: 0, s: 0 };
+				}
+				if (prevState.s === 60) {
+					return { ...prevState, m: prevState.m + 1, s: 0 };
+				}
+				return { ...prevState, s: prevState.s + 1 };
+			});
+		}, 1);
 	};
 
 	useEffect(() => {
-		handleTime();
+		// handleTime();
 		return () => {
 			clearInterval(id.current);
 		};
@@ -20,11 +32,24 @@ function App() {
 
 	return (
 		<div className='App'>
-			<h1>{time}</h1>
+			<h1>
+				{time.h}:{time.m}:{time.s}
+			</h1>
 			<div>
-				<button>Start</button>
-				<button>pause</button>
-				<button>reset</button>
+				<button onClick={handleTime}>Start</button>
+				<button onClick={() => clearInterval(id.current)}>pause</button>
+				<button
+					onClick={() => {
+						clearInterval(id.current);
+						setTime({
+							h: 0,
+							m: 0,
+							s: 0,
+						});
+					}}
+				>
+					reset
+				</button>
 			</div>
 		</div>
 	);
