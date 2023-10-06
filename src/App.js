@@ -33,28 +33,33 @@ function Accordion(props) {
 					onOpen={setCurOpen}
 					num={i}
 					title={el.title}
-					text={el.text}
-				/>
+				>
+					{el.text}
+				</AccordionItem>
 			))}
 		</div>
 	);
 }
 
 function AccordionItem(props) {
-	const { title, text, num, curOpen, onOpen } = props;
+	const { title, children, num, curOpen, onOpen } = props;
 
 	const isOpen = num === curOpen;
 
 	const handleToggle = () => {
-		onOpen(num);
+		if (isOpen) {
+			onOpen(null);
+		} else {
+			onOpen(num);
+		}
 	};
 
 	return (
-		<div className='item' onClick={handleToggle}>
+		<div className={`item ${isOpen ? 'open' : ''}`} onClick={handleToggle}>
 			<p className='number'>{num < 9 ? `0${num + 1}` : num}</p>
 			<p className='title'>{title}</p>
 			<p className='icon'>{isOpen ? '-' : '+'}</p>
-			{isOpen && <div className='content-box'>{text}</div>}
+			{isOpen && <div className='content-box'>{children}</div>}
 		</div>
 	);
 }

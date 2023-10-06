@@ -64,9 +64,10 @@ body {
 /* OPEN STATE */
 .open {
   border-top: 4px solid #087f5b;
+
 }
 
 .open .number,
-.open .text {
+.open .title {
   color: #087f5b;
 }
