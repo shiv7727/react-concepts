@@ -17,7 +17,7 @@ function StarRating({
 	className,
 	messages = [],
 	defaultRating = 0,
-	onSetRating,
+	onSetRating = () => {},
 }) {
 	const [rating, setRating] = useState(defaultRating);
 	const [tempRating, setTempRating] = useState(0);
