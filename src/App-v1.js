@@ -95,7 +95,7 @@ function Search({ query, setQuery }) {
 		return () => {
 			document.removeEventListener('keydown', callback);
 		};
-	}, []);
+	}, [setQuery]);
 	return (
 		<input
 			className='search'
