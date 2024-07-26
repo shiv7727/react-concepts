@@ -4,8 +4,10 @@ import './App.css';
 import Posts from './Posts';
 import Pagination from './Pagination';
 
-let url = 'https://jsonplaceholder.typicode.com/posts';
+let url = process.env.REACT_APP_API_URL;
+
 function App() {
+
 	const [posts, setPosts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [postPerPage] = useState(10);
